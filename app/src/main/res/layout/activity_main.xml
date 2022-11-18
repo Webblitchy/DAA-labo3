@@ -19,6 +19,7 @@
         android:id="@+id/notes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="ch.heigvd.labo3.fragments.Notes" />
+        android:name="ch.heigvd.labo3.fragments.Notes"
+        tools:layout="@layout/fragment_notes" />
 
 </LinearLayout>
