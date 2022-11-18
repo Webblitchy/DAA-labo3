@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'ch.heigvd.labo3'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "ch.heigvd.labo3"
         minSdk 31
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
