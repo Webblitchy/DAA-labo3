@@ -2,9 +2,6 @@ package ch.heigvd.labo3.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ch.heigvd.iict.and.labo4.models.Schedule
-import ch.heigvd.iict.and.labo4.models.State
-import ch.heigvd.iict.and.labo4.models.Type
 import java.util.*
 
 

@@ -1,8 +1,7 @@
-package ch.heigvd.iict.and.labo4.models
+package ch.heigvd.labo3.models
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import ch.heigvd.labo3.models.Note
 
 data class NoteAndSchedule (
     @Embedded val note: Note,
