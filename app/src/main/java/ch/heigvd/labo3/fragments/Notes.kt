@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import ch.heigvd.labo3.R
+import ch.heigvd.labo3.RecyclerAdapterNotes
+import ch.heigvd.labo3.models.Note
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,14 +32,34 @@ class Notes : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
+
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_notes, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val recycler = view.findViewById<RecyclerView>(R.id.view_notes)
+        val adapter = RecyclerAdapterNotes()
+        recycler.adapter = adapter
+        //recycler.layoutManager = LinearLayoutManager(view)
+
+        // Generate 10 random notes
+        for (i in 0 .. 9) {
+            adapter.items += Note.generateRandomNote()
+        }
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {
