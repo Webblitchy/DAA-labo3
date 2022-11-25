@@ -7,7 +7,7 @@ import ch.heigvd.labo3.models.NoteAndSchedule
 import ch.heigvd.labo3.models.Schedule
 
 @Dao
-interface DAO_Note {
+interface NoteDAO {
     @Insert
     fun insert(note: Note): Long
 
@@ -22,7 +22,7 @@ interface DAO_Note {
 }
 
 @Dao
-interface DAO_NoteAndSchedule {
+interface NoteAndScheduleDAO {
     @Insert
     fun insert(noteAndSchedule: NoteAndSchedule): Long
 
@@ -34,7 +34,7 @@ interface DAO_NoteAndSchedule {
 }
 
 @Dao
-interface DAO_Schedule {
+interface ScheduleDAO {
     @Insert
     fun insert(schedule: Schedule): Long
 
