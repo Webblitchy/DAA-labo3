@@ -5,7 +5,6 @@ import androidx.room.*
 import ch.heigvd.labo3.models.Note
 import ch.heigvd.labo3.models.NoteAndSchedule
 import ch.heigvd.labo3.models.Schedule
-import ch.heigvd.labo3.models.State
 
 @Dao
 interface DAO_Note {
