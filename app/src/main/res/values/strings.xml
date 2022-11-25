@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">labo3</string>
+    <string name="menu_item_sort">Sort</string>
     <string name="menu_item_generate">Generate</string>
     <string name="menu_item_delete">Delete all</string>
+    <string name="menu_item_creation">Creation Date</string>
+    <string name="menu_item_eta">ETA</string>
 </resources>
