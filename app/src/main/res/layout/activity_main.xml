@@ -12,8 +12,6 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frag_notes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="ch.heigvd.labo3.fragments.Notes"
-        tools:layout="@layout/fragment_notes" />
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
