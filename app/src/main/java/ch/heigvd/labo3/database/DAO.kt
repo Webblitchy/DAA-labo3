@@ -19,6 +19,16 @@ interface NoteDAO {
 
     @Query("SELECT * FROM Note")
     fun getAll(): LiveData<List<Note>>
+
+    // TODO: create queries
+/*
+    @Query("INSERT * INTO Note")
+    fun insert(note: Note)
+
+    @Query("SELECT * FROM Note")
+    fun getAll(): LiveData<List<Note>>
+
+ */
 }
 
 @Dao
