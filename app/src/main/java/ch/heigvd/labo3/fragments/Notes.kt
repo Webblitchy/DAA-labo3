@@ -35,13 +35,13 @@ class Notes : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val recycler = view.findViewById<RecyclerView>(R.id.view_notes)
         val adapter = RecyclerAdapterNotes()
-        recycler.adapter = adapter
+
         //recycler.layoutManager = LinearLayoutManager(view)
 
-        // Generate 10 random notes
-        for (i in 0 .. 9) {
-            adapter.items += Note.generateRandomNote()
-        }
+        // TODO: fix if empty
+        adapter.items = notesViewModel.allNotes.value!!
+
+        recycler.adapter = adapter
         super.onViewCreated(view, savedInstanceState)
     }
 

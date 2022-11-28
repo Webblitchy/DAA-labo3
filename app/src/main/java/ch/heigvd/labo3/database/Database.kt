@@ -3,6 +3,8 @@ package ch.heigvd.labo3.database
 import android.content.Context
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
+import ch.heigvd.labo3.models.State
+import ch.heigvd.labo3.models.Type
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -11,13 +13,15 @@ typealias Note = ch.heigvd.labo3.models.Note
 typealias Schedule = ch.heigvd.labo3.models.Schedule
 typealias NoteAndSchedule = ch.heigvd.labo3.models.NoteAndSchedule
 
-@Database(entities = [
-    Note::class, Schedule::class],
+@Database(
+    entities = [
+        Note::class, Schedule::class],
     version = 1,
-    exportSchema = true)
+    exportSchema = true
+)
 @TypeConverters(CalendarConverter::class)
 abstract class LaboDatabase : RoomDatabase() {
-    abstract fun noteDAO() : NoteDAO
+    abstract fun noteDAO(): NoteDAO
 
     /*
     private val MIGRATION_1_2 = object : Migration(1, 2) {
@@ -28,14 +32,16 @@ abstract class LaboDatabase : RoomDatabase() {
     */
 
     companion object {
-        private var INSTANCE : LaboDatabase? = null
+        private var INSTANCE: LaboDatabase? = null
 
-        fun getDatabase(context: Context) : LaboDatabase {
+        fun getDatabase(context: Context): LaboDatabase {
             return INSTANCE ?: synchronized(this) {
-                INSTANCE = Room.databaseBuilder(context.applicationContext,
-                    LaboDatabase::class.java, "LaboDatabase.sqlite")
+                INSTANCE = Room.databaseBuilder(
+                    context.applicationContext,
+                    LaboDatabase::class.java, "LaboDatabase.sqlite"
+                )
                     //.addMigrations(MIGRATION_1_2)
-                    //.fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration()
                     .addCallback(LaboDatabaseCallBack())
                     .build()
                 INSTANCE!!
@@ -51,7 +57,12 @@ abstract class LaboDatabase : RoomDatabase() {
                         thread {
                             // when the database is created for the 1st time, we can, for example, populate it
                             // should be done asynchronously
-                            // TODO: add some data
+
+                            // Generate 10 random notes
+                            for (i in 0 .. 9) {
+                                val note = Note.generateRandomNote()
+                                database.noteDAO().insert(note)
+                            }
                         }
                     }
                 }
@@ -66,6 +77,7 @@ class CalendarConverter {
         Calendar.getInstance().apply {
             time = Date(dateLong)
         }
+
     @TypeConverter
     fun fromCalendar(date: Calendar) =
         date.time.time // Long
