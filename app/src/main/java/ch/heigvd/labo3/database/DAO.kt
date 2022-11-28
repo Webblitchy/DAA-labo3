@@ -20,6 +20,9 @@ interface NoteDAO {
     @Query("SELECT * FROM Note")
     fun getAll(): LiveData<List<Note>>
 
+    @Query("SELECT COUNT(*) FROM Note")
+    fun getCount(): LiveData<Long>
+
     // TODO: delete all notes
     /*
     @Query("DELETE FROM Note")

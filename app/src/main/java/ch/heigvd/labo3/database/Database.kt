@@ -2,7 +2,9 @@ package ch.heigvd.labo3.database
 
 import android.content.Context
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteDatabase
 import java.util.*
+import kotlin.concurrent.thread
 
 
 typealias Note = ch.heigvd.labo3.models.Note
@@ -34,9 +36,25 @@ abstract class LaboDatabase : RoomDatabase() {
                     LaboDatabase::class.java, "LaboDatabase.sqlite")
                     //.addMigrations(MIGRATION_1_2)
                     .fallbackToDestructiveMigration()
-                    //.addCallback(RDatabaseCallBack())
+                    .addCallback(LaboDatabaseCallBack())
                     .build()
                 INSTANCE!!
+            }
+        }
+
+        private class LaboDatabaseCallBack : Callback() {
+            override fun onCreate(db: SupportSQLiteDatabase) {
+                super.onCreate(db)
+                INSTANCE?.let { database ->
+                    val isEmpty = database.noteDAO().getCount().value == 0L
+                    if (isEmpty) {
+                        thread {
+                            // when the database is created for the 1st time, we can, for example, populate it
+                            // should be done asynchronously
+                            // TODO: add some data
+                        }
+                    }
+                }
             }
         }
     }
