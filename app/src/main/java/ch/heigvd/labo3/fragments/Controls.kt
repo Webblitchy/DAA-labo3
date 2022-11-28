@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import ch.heigvd.labo3.LaboApp
+import ch.heigvd.labo3.NotesViewModel
+import ch.heigvd.labo3.NotesViewModelFactory
 import ch.heigvd.labo3.R
 
 /**
@@ -13,6 +17,10 @@ import ch.heigvd.labo3.R
  * create an instance of this fragment.
  */
 class Controls : Fragment() {
+    private val notesViewModel: NotesViewModel by activityViewModels {
+        NotesViewModelFactory((requireActivity().application as LaboApp).repository)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
