@@ -12,7 +12,7 @@ typealias Schedule = ch.heigvd.labo3.models.Schedule
 typealias NoteAndSchedule = ch.heigvd.labo3.models.NoteAndSchedule
 
 @Database(entities = [
-    Note::class, Schedule::class, NoteAndSchedule::class],
+    Note::class, Schedule::class],
     version = 1,
     exportSchema = true)
 @TypeConverters(CalendarConverter::class)
@@ -35,7 +35,7 @@ abstract class LaboDatabase : RoomDatabase() {
                 INSTANCE = Room.databaseBuilder(context.applicationContext,
                     LaboDatabase::class.java, "LaboDatabase.sqlite")
                     //.addMigrations(MIGRATION_1_2)
-                    .fallbackToDestructiveMigration()
+                    //.fallbackToDestructiveMigration()
                     .addCallback(LaboDatabaseCallBack())
                     .build()
                 INSTANCE!!

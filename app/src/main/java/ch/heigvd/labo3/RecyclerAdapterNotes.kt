@@ -37,7 +37,7 @@ class RecyclerAdapterNotes (_items : List<Note> = listOf()) : RecyclerView.Adapt
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val image = view.findViewById<ImageView>(R.id.image)
+        val image = view.findViewById<ImageView>(R.id.note_icon)
 
         fun bind(note: Note) {
             // TODO: set title, schedule logo, ...
