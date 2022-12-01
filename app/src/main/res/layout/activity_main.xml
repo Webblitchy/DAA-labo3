@@ -6,11 +6,10 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <!-- TODO: menu bar -> voir actionBar slide 14 chap 5-->
-
     <!-- Notes list -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frag_notes"
+        android:name="ch.heigvd.labo3.fragments.Notes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
