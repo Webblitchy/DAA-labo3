@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ch.heigvd.labo3.models.Note
 import ch.heigvd.labo3.models.Type
@@ -12,9 +14,10 @@ class RecyclerAdapterNotes (_items : List<Note> = listOf()) : RecyclerView.Adapt
     var items = listOf<Note>()
 
     set(value) {
+        val diffCallback = NotesDiffCallback(items, value)
+        val diffItems = DiffUtil.calculateDiff(diffCallback)
         field = value
-        // TODO: use diffItems.dispatchUpdatesTo(this)
-        notifyDataSetChanged()
+        diffItems.dispatchUpdatesTo(this)
     }
 
     init {
@@ -37,27 +40,46 @@ class RecyclerAdapterNotes (_items : List<Note> = listOf()) : RecyclerView.Adapt
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val image = view.findViewById<ImageView>(R.id.note_icon)
+        val noteIcon = view.findViewById<ImageView>(R.id.note_icon)
+        val noteTitle = view.findViewById<TextView>(R.id.note_title)
+        val noteText = view.findViewById<TextView>(R.id.note_text)
 
         fun bind(note: Note) {
             // TODO: set title, schedule logo, ...
+            noteTitle.setText(note.title)
+            noteText.setText(note.text)
+            //note.state
             when (note.type) {
                 Type.NONE -> {
-                    image.setImageResource(R.drawable.note)
+                    noteIcon.setImageResource(R.drawable.note)
                 }
                 Type.TODO -> {
-                    image.setImageResource(R.drawable.todo)
+                    noteIcon.setImageResource(R.drawable.todo)
                 }
                 Type.SHOPPING -> {
-                    image.setImageResource(R.drawable.shopping)
+                    noteIcon.setImageResource(R.drawable.shopping)
                 }
                 Type.WORK -> {
-                    image.setImageResource(R.drawable.work)
+                    noteIcon.setImageResource(R.drawable.work)
                 }
                 Type.FAMILY -> {
-                    image.setImageResource(R.drawable.family)
+                    noteIcon.setImageResource(R.drawable.family)
                 }
             }
         }
+    }
+}
+
+
+class NotesDiffCallback(private val oldList: List<Note>, private val newList: List<Note>) : DiffUtil.Callback() {
+    override fun getOldListSize() = oldList.size
+    override fun getNewListSize() = newList.size
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition].noteId == newList[newItemPosition].noteId
+    }
+    override fun areContentsTheSame(oldItemPosition : Int, newItemPosition : Int): Boolean {
+        val old = oldList[oldItemPosition]
+        val new = newList[newItemPosition]
+        return old::class == new::class && old.state == new.state
     }
 }

@@ -45,6 +45,7 @@ class Notes : Fragment() {
             adapter.items +=  Note.generateRandomNote()
         }
 
+
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(view.context)
         super.onViewCreated(view, savedInstanceState)
