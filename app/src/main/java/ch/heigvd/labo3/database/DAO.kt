@@ -40,6 +40,13 @@ interface NoteAndScheduleDAO {
 
     @Delete
     fun delete(noteAndSchedule: NoteAndSchedule)
+
+    // TODO: make it works
+    /*
+    @Transaction
+    @Query("SELECT * FROM Note LEFT JOIN Schedule")
+    fun getNotesAndSchedules(): List<NoteAndSchedule>
+    */
 }
 
 @Dao

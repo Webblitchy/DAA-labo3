@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ch.heigvd.labo3.*
 import ch.heigvd.labo3.models.Note
@@ -39,9 +40,13 @@ class Notes : Fragment() {
         //recycler.layoutManager = LinearLayoutManager(view)
 
         // TODO: fix if empty
-        adapter.items = notesViewModel.allNotes.value!!
+        //adapter.items = notesViewModel.allNotes.value!!
+        for (i in 0 .. 9) {
+            adapter.items +=  Note.generateRandomNote()
+        }
 
         recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(view.context)
         super.onViewCreated(view, savedInstanceState)
     }
 
