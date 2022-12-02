@@ -18,8 +18,9 @@ class Repository(private val noteDAO: NoteDAO, private val scheduleDAO: Schedule
 
     fun insertNote(noteAndSchedule: NoteAndSchedule) {
         thread {
-            noteDAO.insert(noteAndSchedule.note)
+            val idNote = noteDAO.insert(noteAndSchedule.note)
             if (noteAndSchedule.schedule != null) {
+                noteAndSchedule.schedule.ownerId = idNote
                 Log.w("oui", noteAndSchedule.schedule.date.toString())
                 scheduleDAO.insert(noteAndSchedule.schedule)
             }
