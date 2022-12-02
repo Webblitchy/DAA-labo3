@@ -6,6 +6,7 @@ import ch.heigvd.labo3.models.NoteAndSchedule
 import ch.heigvd.labo3.models.Note
 import ch.heigvd.labo3.models.Schedule
 
+
 @Dao
 interface NoteDAO {
     @Insert
