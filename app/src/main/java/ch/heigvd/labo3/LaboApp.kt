@@ -13,7 +13,7 @@ class LaboApp : Application() {
 
     val repository by lazy {
         val database = LaboDatabase.getDatabase(this)
-        Repository(database.noteDAO()/*, applicationScope*/)
+        Repository(database.noteDAO(), database.scheduleDAO())
     }
 
 }

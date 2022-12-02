@@ -1,17 +1,15 @@
 package ch.heigvd.labo3.database
 
 import android.content.Context
+import android.util.Log
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
-import ch.heigvd.labo3.models.State
-import ch.heigvd.labo3.models.Type
 import java.util.*
 import kotlin.concurrent.thread
+import ch.heigvd.labo3.models.Note
+import ch.heigvd.labo3.models.NoteAndSchedule
+import ch.heigvd.labo3.models.Schedule
 
-
-typealias Note = ch.heigvd.labo3.models.Note
-typealias Schedule = ch.heigvd.labo3.models.Schedule
-typealias NoteAndSchedule = ch.heigvd.labo3.models.NoteAndSchedule
 
 /*
  * Authors: Eliott Chytil, Maxim Golay & Lucien Perregaux
@@ -25,6 +23,7 @@ typealias NoteAndSchedule = ch.heigvd.labo3.models.NoteAndSchedule
 @TypeConverters(CalendarConverter::class)
 abstract class LaboDatabase : RoomDatabase() {
     abstract fun noteDAO(): NoteDAO
+    abstract fun scheduleDAO(): ScheduleDAO
 
     /*
     private val MIGRATION_1_2 = object : Migration(1, 2) {
@@ -63,8 +62,11 @@ abstract class LaboDatabase : RoomDatabase() {
 
                             // Generate 10 random notes
                             for (i in 0 .. 9) {
-                                val note = Note.generateRandomNote()
-                                database.noteDAO().insert(note)
+                                database.noteDAO().insert(Note.generateRandomNote())
+                                val schedule = Note.generateRandomSchedule()
+                                if (schedule != null) {
+                                    database.scheduleDAO().insert(schedule)
+                                }
                             }
                         }
                     }

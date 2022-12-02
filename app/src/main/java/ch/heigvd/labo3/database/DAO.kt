@@ -6,9 +6,6 @@ import ch.heigvd.labo3.models.NoteAndSchedule
 import ch.heigvd.labo3.models.Note
 import ch.heigvd.labo3.models.Schedule
 
-/*
- * Authors: Eliott Chytil, Maxim Golay & Lucien Perregaux
- */
 @Dao
 interface NoteDAO {
     @Insert
@@ -40,4 +37,7 @@ interface ScheduleDAO {
 
     @Delete
     fun delete(schedule: Schedule)
+
+    @Query("DELETE FROM Schedule")
+    fun deleteAll()
 }

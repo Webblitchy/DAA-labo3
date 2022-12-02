@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             // Handle item selection
             return when (item.itemId) {
                 R.id.main_menu_item_generate -> {
-                    notesViewModel.generateRandomNote()
+                    notesViewModel.generateRandomNoteAndSchedule()
                     true
                 }
                 R.id.main_menu_item_delete -> {

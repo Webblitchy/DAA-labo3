@@ -3,7 +3,7 @@ package ch.heigvd.labo3
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ch.heigvd.labo3.database.NoteAndSchedule
+import ch.heigvd.labo3.models.NoteAndSchedule
 import ch.heigvd.labo3.database.Repository
 import ch.heigvd.labo3.models.Note
 /*
@@ -14,12 +14,13 @@ class NotesViewModel(private val repository: Repository) : ViewModel() {
         return repository.getAllNotes()
     }
 
-    fun generateRandomNote() {
-        insertNote(Note.generateRandomNote())
+    fun generateRandomNoteAndSchedule() {
+        val noteAndSchedule = NoteAndSchedule(Note.generateRandomNote(), Note.generateRandomSchedule())
+        insertNoteAndSchedule(noteAndSchedule)
     }
 
-    fun insertNote(note: Note) {
-        repository.insertNote(note)
+    fun insertNoteAndSchedule(noteAndSchedule: NoteAndSchedule) {
+        repository.insertNote(noteAndSchedule)
     }
 
     fun deleteAllNote() {

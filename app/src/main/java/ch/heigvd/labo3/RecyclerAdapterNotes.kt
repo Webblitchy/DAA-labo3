@@ -1,11 +1,14 @@
 package ch.heigvd.labo3
 
 import android.graphics.ColorFilter
+import android.opengl.Visibility
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ch.heigvd.labo3.models.Note
@@ -42,20 +45,20 @@ class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : Recycle
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position].note)
+        holder.bind(items[position])
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val noteIcon = view.findViewById<ImageView>(R.id.note_icon)
         val noteTitle = view.findViewById<TextView>(R.id.note_title)
         val noteText = view.findViewById<TextView>(R.id.note_text)
+        val statusIcon = view.findViewById<ImageView>(R.id.status_icon)
 
-        fun bind(note: Note) {
-            // TODO: set title, schedule logo, ...
-            noteTitle.setText(note.title)
-            noteText.setText(note.text)
-            //noteState
-            when (note.type) {
+        fun bind(noteAndSchedule: NoteAndSchedule) {
+            noteTitle.text = noteAndSchedule.note.title
+            noteText.text = noteAndSchedule.note.text
+
+            when (noteAndSchedule.note.type) {
                 Type.NONE -> {
                     noteIcon.setImageResource(R.drawable.note)
                 }
@@ -73,7 +76,7 @@ class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : Recycle
                 }
             }
 
-            when (note.state) {
+            when (noteAndSchedule.note.state) {
                 State.IN_PROGRESS -> {
                     noteIcon.setColorFilter(noteIcon.context.resources.getColor(R.color.grey));
                 }
@@ -81,6 +84,13 @@ class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : Recycle
                     noteIcon.setColorFilter(noteIcon.context.resources.getColor(R.color.green));
                 }
             }
+
+            if (noteAndSchedule.schedule != null) {
+                Log.w("visibleTest", "oiu")
+                statusIcon.visibility = View.VISIBLE
+
+            }
+
         }
     }
 }
