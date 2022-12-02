@@ -1,5 +1,6 @@
 package ch.heigvd.labo3
 
+import android.graphics.ColorFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ch.heigvd.labo3.models.Note
 import ch.heigvd.labo3.models.NoteAndSchedule
+import ch.heigvd.labo3.models.State
 import ch.heigvd.labo3.models.Type
 
 /*
@@ -52,7 +54,7 @@ class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : Recycle
             // TODO: set title, schedule logo, ...
             noteTitle.setText(note.title)
             noteText.setText(note.text)
-            //note.state
+            //noteState
             when (note.type) {
                 Type.NONE -> {
                     noteIcon.setImageResource(R.drawable.note)
@@ -68,6 +70,15 @@ class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : Recycle
                 }
                 Type.FAMILY -> {
                     noteIcon.setImageResource(R.drawable.family)
+                }
+            }
+
+            when (note.state) {
+                State.IN_PROGRESS -> {
+                    noteIcon.setColorFilter(noteIcon.context.resources.getColor(R.color.grey));
+                }
+                State.DONE -> {
+                    noteIcon.setColorFilter(noteIcon.context.resources.getColor(R.color.green));
                 }
             }
         }
