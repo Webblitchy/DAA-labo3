@@ -11,6 +11,9 @@ import ch.heigvd.labo3.NotesViewModel
 import ch.heigvd.labo3.NotesViewModelFactory
 import ch.heigvd.labo3.R
 
+/*
+ * Authors: Eliott Chytil, Maxim Golay & Lucien Perregaux
+ */
 /**
  * A simple [Fragment] subclass.
  * Use the [Controls.newInstance] factory method to

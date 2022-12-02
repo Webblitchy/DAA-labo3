@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import ch.heigvd.labo3.database.NoteAndSchedule
 import ch.heigvd.labo3.database.Repository
 import ch.heigvd.labo3.models.Note
-
+/*
+ * Authors: Eliott Chytil, Maxim Golay & Lucien Perregaux
+ */
 class NotesViewModel(private val repository: Repository) : ViewModel() {
     fun getAllNotes(): LiveData<List<NoteAndSchedule>> {
         return repository.getAllNotes()

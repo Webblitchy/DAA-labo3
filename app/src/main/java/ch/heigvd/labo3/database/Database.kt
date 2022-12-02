@@ -13,6 +13,9 @@ typealias Note = ch.heigvd.labo3.models.Note
 typealias Schedule = ch.heigvd.labo3.models.Schedule
 typealias NoteAndSchedule = ch.heigvd.labo3.models.NoteAndSchedule
 
+/*
+ * Authors: Eliott Chytil, Maxim Golay & Lucien Perregaux
+ */
 @Database(
     entities = [
         Note::class, Schedule::class],

@@ -6,6 +6,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 
+/*
+ * Authors: Eliott Chytil, Maxim Golay & Lucien Perregaux
+ */
 class MainActivity : AppCompatActivity() {
     private val notesViewModel: NotesViewModel by viewModels {
         NotesViewModelFactory((application as LaboApp).repository)

@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import ch.heigvd.labo3.*
 import java.util.*
 
+/*
+ * Authors: Eliott Chytil, Maxim Golay & Lucien Perregaux
+ */
 /**
  * A simple [Fragment] subclass.
  * Use the [Notes.newInstance] factory method to

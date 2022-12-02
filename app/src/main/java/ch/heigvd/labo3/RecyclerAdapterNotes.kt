@@ -11,6 +11,9 @@ import ch.heigvd.labo3.models.Note
 import ch.heigvd.labo3.models.NoteAndSchedule
 import ch.heigvd.labo3.models.Type
 
+/*
+ * Authors: Eliott Chytil, Maxim Golay & Lucien Perregaux
+ */
 class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : RecyclerView.Adapter<RecyclerAdapterNotes.ViewHolder>() {
     var items = listOf<NoteAndSchedule>()
 
