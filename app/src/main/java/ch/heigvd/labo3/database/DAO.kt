@@ -6,7 +6,9 @@ import ch.heigvd.labo3.models.NoteAndSchedule
 import ch.heigvd.labo3.models.Note
 import ch.heigvd.labo3.models.Schedule
 
-
+/*
+ * Authors: Eliott Chytil, Maxim Golay & Lucien Perregaux
+ */
 @Dao
 interface NoteDAO {
     @Insert
