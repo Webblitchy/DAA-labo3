@@ -53,6 +53,7 @@ class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : Recycle
         val noteTitle = view.findViewById<TextView>(R.id.note_title)
         val noteText = view.findViewById<TextView>(R.id.note_text)
         val statusIcon = view.findViewById<ImageView>(R.id.status_icon)
+        val statusText = view.findViewById<TextView>(R.id.status_text)
 
         fun bind(noteAndSchedule: NoteAndSchedule) {
             noteTitle.text = noteAndSchedule.note.title
@@ -88,7 +89,7 @@ class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : Recycle
             if (noteAndSchedule.schedule != null) {
                 Log.w("visibleTest", "oiu")
                 statusIcon.visibility = View.VISIBLE
-
+                statusText.text = "TEST"
             }
 
         }

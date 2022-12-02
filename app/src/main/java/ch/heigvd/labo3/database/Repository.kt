@@ -10,10 +10,7 @@ import kotlin.concurrent.thread
  */
 class Repository(private val noteDAO: NoteDAO, private val scheduleDAO: ScheduleDAO) {
     fun getAllNotes() : LiveData<List<NoteAndSchedule>> {
-        //return noteDAO.getAll()
-        val notes = noteDAO.getAll()
-        Log.w("TAG", notes.value.toString())
-        return notes
+        return noteDAO.getAll()
     }
 
     fun insertNote(noteAndSchedule: NoteAndSchedule) {
