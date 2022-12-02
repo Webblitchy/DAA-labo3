@@ -5,7 +5,7 @@ import ch.heigvd.labo3.models.Note
 import kotlin.concurrent.thread
 
 class Repository(private val noteDAO: NoteDAO) {
-    fun getAllNotes() : LiveData<List<Note>> {
+    fun getAllNotes() : LiveData<List<NoteAndSchedule>> {
         return noteDAO.getAll()
     }
 

@@ -3,11 +3,12 @@ package ch.heigvd.labo3
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import ch.heigvd.labo3.database.NoteAndSchedule
 import ch.heigvd.labo3.database.Repository
 import ch.heigvd.labo3.models.Note
 
 class NotesViewModel(private val repository: Repository) : ViewModel() {
-    fun getAllNotes(): LiveData<List<Note>> {
+    fun getAllNotes(): LiveData<List<NoteAndSchedule>> {
         return repository.getAllNotes()
     }
 

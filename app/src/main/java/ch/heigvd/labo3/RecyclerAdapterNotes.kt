@@ -8,10 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ch.heigvd.labo3.models.Note
+import ch.heigvd.labo3.models.NoteAndSchedule
 import ch.heigvd.labo3.models.Type
 
-class RecyclerAdapterNotes (_items : List<Note> = listOf()) : RecyclerView.Adapter<RecyclerAdapterNotes.ViewHolder>() {
-    var items = listOf<Note>()
+class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : RecyclerView.Adapter<RecyclerAdapterNotes.ViewHolder>() {
+    var items = listOf<NoteAndSchedule>()
 
     set(value) {
         val diffCallback = NotesDiffCallback(items, value)
@@ -27,7 +28,7 @@ class RecyclerAdapterNotes (_items : List<Note> = listOf()) : RecyclerView.Adapt
     override fun getItemCount() = items.size
 
     override fun getItemViewType(position: Int): Int {
-        return items[position].type.ordinal
+        return items[position].note.type.ordinal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,7 +37,7 @@ class RecyclerAdapterNotes (_items : List<Note> = listOf()) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position].note)
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -71,15 +72,15 @@ class RecyclerAdapterNotes (_items : List<Note> = listOf()) : RecyclerView.Adapt
 }
 
 
-class NotesDiffCallback(private val oldList: List<Note>, private val newList: List<Note>) : DiffUtil.Callback() {
+class NotesDiffCallback(private val oldList: List<NoteAndSchedule>, private val newList: List<NoteAndSchedule>) : DiffUtil.Callback() {
     override fun getOldListSize() = oldList.size
     override fun getNewListSize() = newList.size
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].noteId == newList[newItemPosition].noteId
+        return oldList[oldItemPosition].note.noteId == newList[newItemPosition].note.noteId
     }
     override fun areContentsTheSame(oldItemPosition : Int, newItemPosition : Int): Boolean {
-        val old = oldList[oldItemPosition]
-        val new = newList[newItemPosition]
+        val old = oldList[oldItemPosition].note
+        val new = newList[newItemPosition].note
         return old::class == new::class && old.state == new.state
     }
 }
