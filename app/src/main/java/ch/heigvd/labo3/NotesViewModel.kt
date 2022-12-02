@@ -1,17 +1,26 @@
 package ch.heigvd.labo3
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ch.heigvd.labo3.database.Repository
+import ch.heigvd.labo3.models.Note
 
 class NotesViewModel(private val repository: Repository) : ViewModel() {
-    val allNotes = repository.allNotes //: LiveData<List<NoteAndSchedule>>
-
-    fun generateANote() {
-        // TODO: generate a note
+    fun getAllNotes(): LiveData<List<Note>> {
+        return repository.getAllNotes()
     }
+
+    fun generateRandomNote() {
+        insertNote(Note.generateRandomNote())
+    }
+
+    fun insertNote(note: Note) {
+        repository.insertNote(note)
+    }
+
     fun deleteAllNote() {
-        // TODO: delete all notes
+        repository.deleteAllNotes()
     }
 }
 

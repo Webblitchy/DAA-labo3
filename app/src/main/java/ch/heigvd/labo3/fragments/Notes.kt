@@ -1,6 +1,7 @@
 package ch.heigvd.labo3.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ch.heigvd.labo3.*
-import ch.heigvd.labo3.models.Note
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -19,10 +20,6 @@ import ch.heigvd.labo3.models.Note
 class Notes : Fragment() {
     private val notesViewModel: NotesViewModel by activityViewModels {
         NotesViewModelFactory((requireActivity().application as LaboApp).repository)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -37,14 +34,9 @@ class Notes : Fragment() {
         val recycler = view.findViewById<RecyclerView>(R.id.view_notes)
         val adapter = RecyclerAdapterNotes()
 
-        //recycler.layoutManager = LinearLayoutManager(view)
-
-        // TODO: fix if empty
-        //adapter.items = notesViewModel.allNotes.value!!
-        for (i in 0 .. 9) {
-            adapter.items +=  Note.generateRandomNote()
+        notesViewModel.getAllNotes().observe(viewLifecycleOwner){
+            adapter.items = it
         }
-
 
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(view.context)

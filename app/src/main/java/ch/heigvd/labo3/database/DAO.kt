@@ -2,8 +2,8 @@ package ch.heigvd.labo3.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import ch.heigvd.labo3.models.Note
 import ch.heigvd.labo3.models.NoteAndSchedule
+import ch.heigvd.labo3.models.Note
 import ch.heigvd.labo3.models.Schedule
 
 @Dao
@@ -23,30 +23,8 @@ interface NoteDAO {
     @Query("SELECT COUNT(*) FROM Note")
     fun getCount(): LiveData<Long>
 
-    // TODO: delete all notes
-    /*
     @Query("DELETE FROM Note")
     fun deleteAll()
-     */
-}
-
-@Dao
-interface NoteAndScheduleDAO {
-    @Insert
-    fun insert(noteAndSchedule: NoteAndSchedule): Long
-
-    @Update
-    fun update(noteAndSchedule: NoteAndSchedule)
-
-    @Delete
-    fun delete(noteAndSchedule: NoteAndSchedule)
-
-    // TODO: make it works
-    /*
-    @Transaction
-    @Query("SELECT * FROM Note LEFT JOIN Schedule")
-    fun getNotesAndSchedules(): List<NoteAndSchedule>
-    */
 }
 
 @Dao
