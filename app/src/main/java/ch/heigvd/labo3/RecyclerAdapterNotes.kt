@@ -1,20 +1,18 @@
 package ch.heigvd.labo3
 
-import android.graphics.ColorFilter
-import android.opengl.Visibility
 import android.util.Log
+import java.util.Calendar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import ch.heigvd.labo3.models.Note
 import ch.heigvd.labo3.models.NoteAndSchedule
 import ch.heigvd.labo3.models.State
 import ch.heigvd.labo3.models.Type
+import kotlin.math.roundToInt
 
 /*
  * Authors: Eliott Chytil, Maxim Golay & Lucien Perregaux
@@ -79,17 +77,34 @@ class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : Recycle
 
             when (noteAndSchedule.note.state) {
                 State.IN_PROGRESS -> {
-                    noteIcon.setColorFilter(noteIcon.context.resources.getColor(R.color.grey));
+                    noteIcon.setColorFilter(noteIcon.context.getColor(R.color.grey));
                 }
                 State.DONE -> {
-                    noteIcon.setColorFilter(noteIcon.context.resources.getColor(R.color.green));
+                    noteIcon.setColorFilter(noteIcon.context.getColor(R.color.green));
                 }
             }
 
-            if (noteAndSchedule.schedule != null) {
-                Log.w("visibleTest", "oiu")
+            if (noteAndSchedule.note.state == State.IN_PROGRESS
+                    && noteAndSchedule.schedule != null ){
+
                 statusIcon.visibility = View.VISIBLE
-                statusText.text = "TEST"
+
+                // to reset to black
+                statusIcon.setColorFilter(statusIcon.context.getColor(R.color.black))
+
+                val remainingDays = getRemainingDays(noteAndSchedule.schedule.date)
+                Log.w("TAG3", remainingDays.toString())
+                if (remainingDays <= 0) {
+                    statusText.text = statusText.context.getString(R.string.late_text)
+                    statusIcon.setColorFilter(statusIcon.context.getColor(R.color.red))
+                } else if (remainingDays < 7) {
+                    statusText.text = String.format("%d days", remainingDays)
+                } else if (remainingDays < 30) {
+                    statusText.text = String.format("%d weeks", (remainingDays / 7.0).roundToInt())
+                } else {
+                    statusText.text = String.format("%d months", (remainingDays / 30.0).roundToInt())
+                }
+
             }
 
         }
@@ -108,4 +123,8 @@ class NotesDiffCallback(private val oldList: List<NoteAndSchedule>, private val 
         val new = newList[newItemPosition].note
         return old::class == new::class && old.state == new.state
     }
+}
+
+private fun getRemainingDays(deadLineDate: Calendar) : Int {
+    return ((deadLineDate.timeInMillis - Calendar.getInstance().timeInMillis) / 86400000).toInt()
 }
