@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import ch.heigvd.labo3.LaboApp
 import ch.heigvd.labo3.NotesViewModel
@@ -30,6 +31,26 @@ class Controls : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_controls, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val noteCounter = view.findViewById<TextView>(R.id.label_number_notes)
+        val generateButton = view.findViewById<TextView>(R.id.button_generate)
+        val clearButton = view.findViewById<TextView>(R.id.button_delete)
+
+        notesViewModel.getAllNotes().observe(viewLifecycleOwner) {
+            noteCounter.text = it.size.toString()
+        }
+
+        generateButton.setOnClickListener {
+            notesViewModel.generateRandomNoteAndSchedule()
+        }
+
+        clearButton.setOnClickListener {
+            notesViewModel.deleteAllNote()
+        }
+
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {

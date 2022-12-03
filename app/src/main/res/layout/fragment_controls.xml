@@ -11,8 +11,7 @@
         app:layout_constraintBottom_toTopOf="@id/button_generate"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="0"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
     <Button
         android:id="@+id/button_generate"
         android:layout_width="wrap_content"
