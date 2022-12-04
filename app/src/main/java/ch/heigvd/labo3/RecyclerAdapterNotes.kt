@@ -1,6 +1,5 @@
 package ch.heigvd.labo3
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -92,7 +91,6 @@ class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : Recycle
                 statusIcon.setColorFilter(statusIcon.context.getColor(R.color.black))
 
                 val remainingDays = getRemainingDays(noteAndSchedule.schedule.date)
-                Log.w("TAG3", remainingDays.toString())
                 if (remainingDays <= 0) {
                     statusText.text = statusText.context.getString(R.string.late_text)
                     statusIcon.setColorFilter(statusIcon.context.getColor(R.color.red))

@@ -1,7 +1,6 @@
 package ch.heigvd.labo3.database
 
 import android.content.Context
-import android.util.Log
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import java.util.*

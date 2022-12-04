@@ -1,6 +1,5 @@
 package ch.heigvd.labo3.database
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import ch.heigvd.labo3.models.NoteAndSchedule
 import kotlin.concurrent.thread
@@ -18,7 +17,6 @@ class Repository(private val noteDAO: NoteDAO, private val scheduleDAO: Schedule
             val idNote = noteDAO.insert(noteAndSchedule.note)
             if (noteAndSchedule.schedule != null) {
                 noteAndSchedule.schedule.ownerId = idNote
-                Log.w("oui", noteAndSchedule.schedule.date.toString())
                 scheduleDAO.insert(noteAndSchedule.schedule)
             }
         }
