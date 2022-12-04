@@ -34,7 +34,12 @@ class NotesViewModel(private val repository: Repository) : ViewModel() {
                     .toMutableList()
                     .sortedWith(
                         compareBy {
-                            it.schedule?.date
+                            if (it.schedule != null) {
+                                val s = it.schedule
+                                s.date.timeInMillis
+                            } else {
+                                Long.MAX_VALUE
+                            }
                         }
                     )
                 else -> data
