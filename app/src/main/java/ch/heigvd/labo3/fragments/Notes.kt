@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.asFlow
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ch.heigvd.labo3.*
+import ch.heigvd.labo3.models.NoteAndSchedule
+import kotlinx.coroutines.flow.combine
 import java.util.*
 
 /*
@@ -37,7 +41,7 @@ class Notes : Fragment() {
         val recycler = view.findViewById<RecyclerView>(R.id.view_notes)
         val adapter = RecyclerAdapterNotes()
 
-        notesViewModel.getAllNotes().observe(viewLifecycleOwner){
+        notesViewModel.sortedNotes.observe(viewLifecycleOwner) {
             adapter.items = it
         }
 

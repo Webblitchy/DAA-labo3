@@ -35,6 +35,14 @@ class MainActivity : AppCompatActivity() {
                     notesViewModel.deleteAllNote()
                     true
                 }
+                R.id.main_menu_item_creation -> {
+                    notesViewModel.sortingMethod.postValue(NotesViewModel.SortingMethod.SORT_BY_DATE)
+                    true
+                }
+                R.id.main_menu_item_eta -> {
+                    notesViewModel.sortingMethod.postValue(NotesViewModel.SortingMethod.SORT_BY_ETA)
+                    true
+                }
                 else -> super.onOptionsItemSelected(item)
             }
     }
