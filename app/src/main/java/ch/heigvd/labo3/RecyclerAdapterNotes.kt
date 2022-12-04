@@ -84,8 +84,7 @@ class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : Recycle
                 }
             }
 
-            if (noteAndSchedule.note.state == State.IN_PROGRESS
-                    && noteAndSchedule.schedule != null ){
+            if (noteAndSchedule.schedule != null) {
 
                 statusIcon.visibility = View.VISIBLE
 
