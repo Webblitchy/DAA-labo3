@@ -1,7 +1,6 @@
 package ch.heigvd.labo3
 
 import android.util.Log
-import java.util.Calendar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ch.heigvd.labo3.models.NoteAndSchedule
 import ch.heigvd.labo3.models.State
 import ch.heigvd.labo3.models.Type
+import java.util.*
 import kotlin.math.roundToInt
 
 /*
@@ -111,7 +111,6 @@ class RecyclerAdapterNotes (_items : List<NoteAndSchedule> = listOf()) : Recycle
     }
 }
 
-
 class NotesDiffCallback(private val oldList: List<NoteAndSchedule>, private val newList: List<NoteAndSchedule>) : DiffUtil.Callback() {
     override fun getOldListSize() = oldList.size
     override fun getNewListSize() = newList.size
@@ -119,9 +118,15 @@ class NotesDiffCallback(private val oldList: List<NoteAndSchedule>, private val 
         return oldList[oldItemPosition].note.noteId == newList[newItemPosition].note.noteId
     }
     override fun areContentsTheSame(oldItemPosition : Int, newItemPosition : Int): Boolean {
-        val old = oldList[oldItemPosition].note
-        val new = newList[newItemPosition].note
-        return old::class == new::class && old.state == new.state
+        val old = oldList[oldItemPosition]
+        val new = newList[newItemPosition]
+        if (old.schedule != null && new.schedule != null) {
+            // if not same ETA
+            if (getRemainingDays(old.schedule.date) != getRemainingDays(new.schedule.date)) {
+                return false
+            }
+        }
+        return old.note::class == new.note::class && old.note.state == new.note.state
     }
 }
 
